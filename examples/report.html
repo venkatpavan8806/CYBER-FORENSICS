@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>RansomTrace Report - 2026-08-20T07:04:13.433886+00:00</title>
+<style>
+  :root {
+    --bg: #0f1420; --panel: #161d2e; --border: #2a3348; --text: #e6e9f0;
+    --muted: #94a1b8; --accent: #5b8cff; --high: #ef4a5f; --medium: #f2a93b;
+    --low: #6fbf73; --confirmed: #2fbf71; --false-positive: #6b7280; --uncertain: #f2a93b;
+  }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, Segoe UI, Roboto, sans-serif;
+         margin: 0; padding: 0 0 4rem 0; }
+  header { background: var(--panel); border-bottom: 1px solid var(--border); padding: 2rem; }
+  header h1 { margin: 0 0 0.25rem 0; font-size: 1.6rem; }
+  header .subtitle { color: var(--muted); font-size: 0.95rem; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
+  .meta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+               gap: 0.75rem; margin-top: 1.5rem; }
+  .meta-item { background: var(--panel); border: 1px solid var(--border); border-radius: 8px;
+               padding: 0.75rem 1rem; }
+  .meta-item .label { color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .meta-item .value { font-family: "SF Mono", Consolas, monospace; font-size: 0.85rem; word-break: break-all; margin-top: 0.25rem; }
+  .limitations { background: #2a1f10; border: 1px solid #6b4a1a; border-radius: 8px; padding: 1rem 1.25rem;
+                 margin: 1.5rem 0; font-size: 0.9rem; }
+  .limitations strong { color: #f2a93b; }
+  .finding { background: var(--panel); border: 1px solid var(--border); border-radius: 10px;
+             padding: 1.25rem 1.5rem; margin: 1.25rem 0; }
+  .finding-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; }
+  .finding-title { font-size: 1.1rem; font-weight: 600; margin: 0; }
+  .badges { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+  .badge { font-size: 0.72rem; padding: 0.2rem 0.55rem; border-radius: 999px; font-weight: 600;
+           text-transform: uppercase; letter-spacing: 0.03em; white-space: nowrap; }
+  .badge-confidence-high { background: rgba(239,74,95,0.15); color: var(--high); border: 1px solid var(--high); }
+  .badge-confidence-medium { background: rgba(242,169,59,0.15); color: var(--medium); border: 1px solid var(--medium); }
+  .badge-confidence-low { background: rgba(111,191,115,0.15); color: var(--low); border: 1px solid var(--low); }
+  .badge-status-confirmed { background: rgba(47,191,113,0.15); color: var(--confirmed); border: 1px solid var(--confirmed); }
+  .badge-status-false-positive { background: rgba(107,114,128,0.15); color: var(--false-positive); border: 1px solid var(--false-positive); }
+  .badge-status-uncertain { background: rgba(242,169,59,0.15); color: var(--uncertain); border: 1px solid var(--uncertain); }
+  .badge-status-unreviewed { background: rgba(148,161,184,0.15); color: var(--muted); border: 1px solid var(--muted); }
+  .badge-mitre { background: rgba(91,140,255,0.15); color: var(--accent); border: 1px solid var(--accent); }
+  .finding-meta { color: var(--muted); font-size: 0.82rem; margin: 0.5rem 0 0.75rem 0; }
+  .finding-description { margin: 0.5rem 0 1rem 0; line-height: 1.5; }
+  .analyst-note { background: #10202a; border-left: 3px solid var(--accent); padding: 0.6rem 0.9rem;
+                  margin: 0.75rem 0; font-size: 0.88rem; }
+  details summary { cursor: pointer; color: var(--muted); font-size: 0.85rem; margin-top: 0.5rem; }
+  .evidence-item { font-family: "SF Mono", Consolas, monospace; font-size: 0.78rem; background: #0d1220;
+                    border: 1px solid var(--border); border-radius: 6px; padding: 0.6rem 0.8rem; margin: 0.4rem 0; }
+  .evidence-item .ev-desc { color: var(--text); margin-bottom: 0.3rem; }
+  .evidence-item .ev-raw { color: var(--muted); white-space: pre-wrap; word-break: break-all; }
+  footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); color: var(--muted);
+           font-size: 0.8rem; line-height: 1.6; }
+  .empty-state { color: var(--muted); text-align: center; padding: 3rem 0; }
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <h1>RansomTrace &mdash; Ransomware Artifact Analysis Report</h1>
+    <div class="subtitle">Cyber Forensics Capstone &mdash; Disk Forensics</div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="meta-grid">
+    <div class="meta-item"><div class="label">Analyzed input</div><div class="value">examples\_sample_incident_data</div></div>
+    <div class="meta-item"><div class="label">Ingestion mode</div><div class="value">b</div></div>
+    <div class="meta-item"><div class="label">SHA-256 (chain of custody)</div><div class="value">9d25f3003502a63fb79e2089b536e5ae26f94e0906884a70d0dc5066984e2597</div></div>
+    <div class="meta-item"><div class="label">Report generated</div><div class="value">2026-08-20T07:04:13.433886+00:00</div></div>
+    <div class="meta-item"><div class="label">Tool version</div><div class="value">RansomTrace 0.1.0</div></div>
+    <div class="meta-item"><div class="label">Findings</div><div class="value">5 total</div></div>
+  </div>
+
+  <div class="limitations">
+    <strong>Scope &amp; limitations:</strong> single-host, single-image, NTFS/Windows-only analysis.
+    Findings are produced by a documented, rule-based engine (not machine learning) and are not
+    exhaustive - absence of a finding is not proof of absence of an incident. If a "Clear Windows
+    Event Logs" finding (T1070.001) appears below, evidence may be incomplete due to log clearing.
+    Every finding requires human analyst review before being treated as confirmed.
+  </div>
+
+  
+
+  
+  <div class="finding">
+    <div class="finding-header">
+      <h2 class="finding-title">Mass extension-change burst: .locked_demo (40 files)</h2>
+      <div class="badges">
+        <span class="badge badge-confidence-medium">Medium confidence</span>
+        <span class="badge badge-status-confirmed">Confirmed</span>
+        
+        <span class="badge badge-mitre" title="Data Encrypted for Impact">T1486</span>
+        
+      </div>
+    </div>
+    <div class="finding-meta">
+      Rule R1 &middot; Finding ID R1-3c464586a4 &middot;
+      Window: 2026-08-20T07:04:13.219982+00:00 &ndash; 2026-08-20T07:05:31.219982+00:00
+    </div>
+    <p class="finding-description">40 files were changed to the unrecognized extension '.locked_demo' within a 10-minute window (2026-08-20T07:04:13.219982+00:00 to 2026-08-20T07:05:31.219982+00:00), consistent with mass file encryption.</p>
+
+    
+    <div class="analyst-note"><strong>Analyst note:</strong> Reviewed against the synthetic fixture - matches expected attack chain.</div>
+    
+
+    <details>
+      <summary>40 supporting event(s) &mdash; click to expand raw evidence</summary>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:13.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0000.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0000.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:15.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0001.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0001.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:17.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0002.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0002.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:19.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0003.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0003.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:21.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0004.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0004.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:23.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0005.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0005.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:25.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0006.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0006.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:27.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0007.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0007.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:29.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0008.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0008.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:31.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0009.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0009.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:33.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0010.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0010.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:35.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0011.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0011.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:37.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0012.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0012.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:39.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0013.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0013.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:41.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0014.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0014.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:43.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0015.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0015.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:45.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0016.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0016.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:47.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0017.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0017.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:49.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0018.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0018.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:51.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0019.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0019.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:53.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0020.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0020.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:55.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0021.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0021.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:57.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0022.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0022.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:59.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0023.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0023.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:01.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0024.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0024.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:03.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0025.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0025.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:05.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0026.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0026.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:07.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0027.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0027.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:09.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0028.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0028.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:11.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0029.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0029.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:13.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0030.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0030.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:15.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0031.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0031.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:17.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0032.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0032.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:19.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0033.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0033.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:21.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0034.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0034.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:23.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0035.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0035.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:25.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0036.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0036.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:27.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0037.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0037.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:29.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0038.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0038.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:31.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0039.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0039.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+    </details>
+  </div>
+  
+  <div class="finding">
+    <div class="finding-header">
+      <h2 class="finding-title">Ransomware Execution Sequence (correlated)</h2>
+      <div class="badges">
+        <span class="badge badge-confidence-high">High confidence</span>
+        <span class="badge badge-status-confirmed">Confirmed</span>
+        
+        <span class="badge badge-mitre" title="Modify Registry">T1112</span>
+        
+        <span class="badge badge-mitre" title="Data Encrypted for Impact">T1486</span>
+        
+        <span class="badge badge-mitre" title="Inhibit System Recovery">T1490</span>
+        
+        <span class="badge badge-mitre" title="Create or Modify System Process: Windows Service">T1543.003</span>
+        
+        <span class="badge badge-mitre" title="Boot or Logon Autostart Execution: Registry Run Keys / Startup Folder">T1547.001</span>
+        
+      </div>
+    </div>
+    <div class="finding-meta">
+      Rule R4 &middot; Finding ID R4-d456cfc903 &middot;
+      Window: 2026-08-20T07:04:13.219982+00:00 &ndash; 2026-08-20T07:05:36.219982+00:00
+    </div>
+    <p class="finding-description">Correlated attack chain: Mass extension-change burst: .locked_demo (40 files), combined with 1 shadow-copy-deletion finding(s) and 2 registry-persistence finding(s) within 30 minutes of each other. This cross-artifact pattern (mass encryption + backup destruction + persistence) is the signature sequence of a ransomware execution, not an isolated event.</p>
+
+    
+    <div class="analyst-note"><strong>Analyst note:</strong> Reviewed against the synthetic fixture - matches expected attack chain.</div>
+    
+
+    <details>
+      <summary>43 supporting event(s) &mdash; click to expand raw evidence</summary>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:13.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0000.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0000.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:15.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0001.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0001.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:17.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0002.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0002.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:19.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0003.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0003.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:21.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0004.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0004.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:23.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0005.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0005.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:25.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0006.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0006.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:27.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0007.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0007.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:29.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0008.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0008.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:31.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0009.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0009.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:33.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0010.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0010.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:35.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0011.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0011.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:37.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0012.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0012.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:39.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0013.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0013.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:41.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0014.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0014.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:43.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0015.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0015.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:45.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0016.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0016.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:47.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0017.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0017.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:49.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0018.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0018.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:51.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0019.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0019.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:53.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0020.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0020.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:55.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0021.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0021.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:57.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0022.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0022.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:59.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0023.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0023.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:01.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0024.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0024.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:03.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0025.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0025.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:05.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0026.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0026.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:07.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0027.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0027.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:09.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0028.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0028.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:11.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0029.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0029.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:13.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0030.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0030.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:15.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0031.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0031.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:17.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0032.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0032.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:19.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0033.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0033.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:21.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0034.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0034.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:23.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0035.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0035.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:25.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0036.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0036.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:27.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0037.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0037.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:29.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0038.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0038.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:31.219982+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0039.locked_demo</div>
+        <div class="ev-raw">{'path': 'invoice_0039.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[eventlog_vss / shadow_copy_deletion_command] 2026-08-20T07:05:36.219982+00:00</div>
+        <div class="ev-desc">Shadow-copy/recovery-tampering command evidence: New Process Name: C:\Windows\System32\vssadmin.exe vssadmin.exe delete shadows /all /quiet Microsoft-Windows-Security-Auditing</div>
+        <div class="ev-raw">{'source_file': 'examples\\_sample_incident_data\\eventlogs\\synthetic_events.json', 'timestamp': '2026-08-20T07:05:36.219982+00:00', 'event_id': 4688, 'provider': 'Microsoft-Windows-Security-Auditing', 'description': 'New Process Name: C:\\Windows\\System32\\vssadmin.exe', 'command_line': 'vssadmin.exe delete shadows /all /quiet'}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[registry / run_key_persistence] 2026-08-20T07:04:13.386474+00:00</div>
+        <div class="ev-desc">Autostart value 'SecurityUpdate' added under \Software\Microsoft\Windows\CurrentVersion\Run: C:\Users\Public\svchost_update.exe</div>
+        <div class="ev-raw">{'hive_file': 'examples\\_sample_incident_data\\registry\\synthetic_system_software.hiv', 'key_path': '\\Software\\Microsoft\\Windows\\CurrentVersion\\Run', 'value_name': 'SecurityUpdate', 'value_data': 'C:\\Users\\Public\\svchost_update.exe'}</div>
+      </div>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[registry / suspicious_service_created] 2026-08-20T07:04:13.386474+00:00</div>
+        <div class="ev-desc">Service 'WinDefenderHelperSvc' created with ImagePath outside standard system directories: C:\Users\Public\svchost_update.exe</div>
+        <div class="ev-raw">{'hive_file': 'examples\\_sample_incident_data\\registry\\synthetic_system_software.hiv', 'key_path': '\\Services\\WinDefenderHelperSvc', 'service_name': 'WinDefenderHelperSvc', 'image_path': 'C:\\Users\\Public\\svchost_update.exe'}</div>
+      </div>
+      
+    </details>
+  </div>
+  
+  <div class="finding">
+    <div class="finding-header">
+      <h2 class="finding-title">New Run/RunOnce autostart persistence value</h2>
+      <div class="badges">
+        <span class="badge badge-confidence-medium">Medium confidence</span>
+        <span class="badge badge-status-confirmed">Confirmed</span>
+        
+        <span class="badge badge-mitre" title="Modify Registry">T1112</span>
+        
+        <span class="badge badge-mitre" title="Boot or Logon Autostart Execution: Registry Run Keys / Startup Folder">T1547.001</span>
+        
+      </div>
+    </div>
+    <div class="finding-meta">
+      Rule R3 &middot; Finding ID R3-c4604ed891 &middot;
+      Window: 2026-08-20T07:04:13.386474+00:00 &ndash; 2026-08-20T07:04:13.386474+00:00
+    </div>
+    <p class="finding-description">Autostart value 'SecurityUpdate' added under \Software\Microsoft\Windows\CurrentVersion\Run: C:\Users\Public\svchost_update.exe</p>
+
+    
+    <div class="analyst-note"><strong>Analyst note:</strong> Reviewed against the synthetic fixture - matches expected attack chain.</div>
+    
+
+    <details>
+      <summary>1 supporting event(s) &mdash; click to expand raw evidence</summary>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[registry / run_key_persistence] 2026-08-20T07:04:13.386474+00:00</div>
+        <div class="ev-desc">Autostart value 'SecurityUpdate' added under \Software\Microsoft\Windows\CurrentVersion\Run: C:\Users\Public\svchost_update.exe</div>
+        <div class="ev-raw">{'hive_file': 'examples\\_sample_incident_data\\registry\\synthetic_system_software.hiv', 'key_path': '\\Software\\Microsoft\\Windows\\CurrentVersion\\Run', 'value_name': 'SecurityUpdate', 'value_data': 'C:\\Users\\Public\\svchost_update.exe'}</div>
+      </div>
+      
+    </details>
+  </div>
+  
+  <div class="finding">
+    <div class="finding-header">
+      <h2 class="finding-title">New service with non-standard ImagePath</h2>
+      <div class="badges">
+        <span class="badge badge-confidence-medium">Medium confidence</span>
+        <span class="badge badge-status-confirmed">Confirmed</span>
+        
+        <span class="badge badge-mitre" title="Modify Registry">T1112</span>
+        
+        <span class="badge badge-mitre" title="Create or Modify System Process: Windows Service">T1543.003</span>
+        
+      </div>
+    </div>
+    <div class="finding-meta">
+      Rule R3 &middot; Finding ID R3-49994a90c2 &middot;
+      Window: 2026-08-20T07:04:13.386474+00:00 &ndash; 2026-08-20T07:04:13.386474+00:00
+    </div>
+    <p class="finding-description">Service 'WinDefenderHelperSvc' created with ImagePath outside standard system directories: C:\Users\Public\svchost_update.exe</p>
+
+    
+    <div class="analyst-note"><strong>Analyst note:</strong> Reviewed against the synthetic fixture - matches expected attack chain.</div>
+    
+
+    <details>
+      <summary>1 supporting event(s) &mdash; click to expand raw evidence</summary>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[registry / suspicious_service_created] 2026-08-20T07:04:13.386474+00:00</div>
+        <div class="ev-desc">Service 'WinDefenderHelperSvc' created with ImagePath outside standard system directories: C:\Users\Public\svchost_update.exe</div>
+        <div class="ev-raw">{'hive_file': 'examples\\_sample_incident_data\\registry\\synthetic_system_software.hiv', 'key_path': '\\Services\\WinDefenderHelperSvc', 'service_name': 'WinDefenderHelperSvc', 'image_path': 'C:\\Users\\Public\\svchost_update.exe'}</div>
+      </div>
+      
+    </details>
+  </div>
+  
+  <div class="finding">
+    <div class="finding-header">
+      <h2 class="finding-title">Shadow-copy / system-recovery deletion command</h2>
+      <div class="badges">
+        <span class="badge badge-confidence-high">High confidence</span>
+        <span class="badge badge-status-confirmed">Confirmed</span>
+        
+        <span class="badge badge-mitre" title="Inhibit System Recovery">T1490</span>
+        
+      </div>
+    </div>
+    <div class="finding-meta">
+      Rule R2 &middot; Finding ID R2-a632ba9a78 &middot;
+      Window: 2026-08-20T07:05:36.219982+00:00 &ndash; 2026-08-20T07:05:36.219982+00:00
+    </div>
+    <p class="finding-description">Shadow-copy/recovery-tampering command evidence: New Process Name: C:\Windows\System32\vssadmin.exe vssadmin.exe delete shadows /all /quiet Microsoft-Windows-Security-Auditing</p>
+
+    
+    <div class="analyst-note"><strong>Analyst note:</strong> Reviewed against the synthetic fixture - matches expected attack chain.</div>
+    
+
+    <details>
+      <summary>1 supporting event(s) &mdash; click to expand raw evidence</summary>
+      
+      <div class="evidence-item">
+        <div class="ev-desc">[eventlog_vss / shadow_copy_deletion_command] 2026-08-20T07:05:36.219982+00:00</div>
+        <div class="ev-desc">Shadow-copy/recovery-tampering command evidence: New Process Name: C:\Windows\System32\vssadmin.exe vssadmin.exe delete shadows /all /quiet Microsoft-Windows-Security-Auditing</div>
+        <div class="ev-raw">{'source_file': 'examples\\_sample_incident_data\\eventlogs\\synthetic_events.json', 'timestamp': '2026-08-20T07:05:36.219982+00:00', 'event_id': 4688, 'provider': 'Microsoft-Windows-Security-Auditing', 'description': 'New Process Name: C:\\Windows\\System32\\vssadmin.exe', 'command_line': 'vssadmin.exe delete shadows /all /quiet'}</div>
+      </div>
+      
+    </details>
+  </div>
+  
+
+  <footer>
+    RansomTrace is a rule-based, single-host, offline forensic analysis tool built for a BTech
+    Cyber Forensics capstone project. It performs no machine learning, no network access, and no
+    live/real-time monitoring. All findings are traceable to specific raw evidence extracted from
+    the input above; none are inferred without a documented rule. This report reflects only what
+    the ruleset in correlation/rules.py detected at generation time and the validation status an
+    analyst assigned via the CLI or Streamlit review step.
+  </footer>
+</div>
+</body>
+</html>
