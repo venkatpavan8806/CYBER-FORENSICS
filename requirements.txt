@@ -1,0 +1,17 @@
+# RansomTrace dependencies
+pytsk3>=20260101          # Sleuth Kit bindings — Mode A disk image parsing
+regipy>=6.3.0              # pure-Python registry hive parser
+python-evtx>=0.8.1         # EVTX event log parser
+click>=8.1                 # CLI
+Jinja2>=3.1                # HTML report templating
+streamlit>=1.60            # optional web review UI (SHOULD-HAVE, Section 8 item 10)
+pytest>=8.0                # test suite
+
+# NOTE on PDF export: weasyprint was evaluated and `pip install` succeeds, but
+# importing it fails on this Windows environment with:
+#   OSError: cannot load library 'libgobject-2.0-0'
+# WeasyPrint depends on native GTK libraries (Pango/GObject) that are not
+# present on Windows without a separate GTK runtime install. Per the project
+# spec (Section 3), we do NOT fight this toolchain — reports are HTML-only.
+# If you later install the GTK runtime for Windows and want PDF export,
+# `pip install weasyprint` and see report/generate.py for the optional hook.

@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+.DS_Store
+*.log
+/tmp_*
+*.hiv.LOG1
+*.hiv.LOG2
+*.hiv.blf
+*.hiv.regtrans-ms
