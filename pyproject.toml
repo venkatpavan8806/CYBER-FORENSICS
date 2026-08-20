@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ransomtrace"
+version = "0.1.0"
+description = "Offline ransomware artifact analyzer for disk forensics (BTech Cyber Forensics capstone)"
+requires-python = ">=3.11"
+dependencies = [
+    "pytsk3",
+    "regipy>=6.3.0",
+    "python-evtx>=0.8.1",
+    "click>=8.1",
+    "Jinja2>=3.1",
+    "streamlit>=1.60",
+]
+
+[project.scripts]
+ransomtrace = "ransomtrace.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["ransomtrace*"]

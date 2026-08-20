@@ -7,6 +7,13 @@ Jinja2>=3.1                # HTML report templating
 streamlit>=1.60            # optional web review UI (SHOULD-HAVE, Section 8 item 10)
 pytest>=8.0                # test suite
 
+# Test-fixture-generation only (not used by the analysis pipeline itself):
+# builds the zero-download Mode A disk-image fixture. pyfatfs's PyFilesystem2
+# wrapper imports pkg_resources, which modern setuptools (81+) removed; pin
+# below the removal to keep it importable. See simulate/synthetic_disk_image.py.
+pyfatfs>=1.1.0
+setuptools<81
+
 # NOTE on PDF export: weasyprint was evaluated and `pip install` succeeds, but
 # importing it fails on this Windows environment with:
 #   OSError: cannot load library 'libgobject-2.0-0'
