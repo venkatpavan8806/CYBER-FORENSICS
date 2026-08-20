@@ -18,12 +18,28 @@ lives in correlation/rules.py per the project spec.
 """
 from __future__ import annotations
 
+import math
 import re
+from collections import Counter
+from collections.abc import Callable
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
 
 from ransomtrace.models import Event, SourceExtractor
+
+# How much file content to sample for entropy corroboration (SHOULD-HAVE,
+# Section 8 #11). A few KB is enough to distinguish "looks like ciphertext"
+# from "looks like text/structured data" without reading whole files -
+# entropy of real encrypted output is close to uniform across any sample.
+ENTROPY_SAMPLE_BYTES = 8192
+
+# Real ciphertext/compressed output sits close to the theoretical maximum of
+# 8 bits/byte; plain text, source code, and most structured formats sit
+# noticeably lower (typically 4-6 bits/byte). 7.5 is a conservative cutoff
+# that corroborates "this really does look encrypted" without false-flagging
+# already-compressed formats that happen to have an unrecognized extension.
+HIGH_ENTROPY_THRESHOLD = 7.5
 
 # Common, everyday extensions we do NOT want to treat as "suspicious" on their
 # own - keeps normal bulk file operations (e.g. extracting a zip full of .txt
@@ -61,7 +77,20 @@ def _is_ransom_note(filename: str) -> bool:
     return bool(RANSOM_NOTE_PATTERN.match(filename))
 
 
-def extract_filesystem_events(file_records: list[FileRecord]) -> list[Event]:
+def shannon_entropy(data: bytes) -> float:
+    """Shannon entropy in bits/byte (0 = totally uniform/repetitive, 8 = max,
+    consistent with truly random bytes such as real ciphertext)."""
+    if not data:
+        return 0.0
+    counts = Counter(data)
+    length = len(data)
+    return -sum((n / length) * math.log2(n / length) for n in counts.values())
+
+
+def extract_filesystem_events(
+    file_records: list[FileRecord],
+    read_sample: Callable[[str], bytes | None] | None = None,
+) -> list[Event]:
     """Convert file records into normalized Events.
 
     Emits one `file_extension_change` Event per file whose extension is not in
@@ -69,6 +98,13 @@ def extract_filesystem_events(file_records: list[FileRecord]) -> list[Event]:
     `ransom_note_file` Event per filename matching a known ransom-note pattern.
     Files with common extensions and non-matching names are not emitted - they
     carry no signal for this extractor and would only add noise.
+
+    `read_sample`, if given, is called with each unusual-extension file's path
+    to fetch up to ENTROPY_SAMPLE_BYTES of real content; when it returns data,
+    the sample's Shannon entropy is attached to the event as corroborating
+    evidence (SHOULD-HAVE, Section 8 #11). Optional because entropy sampling
+    needs real file bytes, which aren't always available (e.g. a filelist.csv
+    describing filesystem state without file content).
     """
     events: list[Event] = []
     for record in file_records:
@@ -90,19 +126,31 @@ def extract_filesystem_events(file_records: list[FileRecord]) -> list[Event]:
             )
 
         if record.extension and record.extension.lower() not in COMMON_EXTENSIONS:
+            raw_evidence = {
+                "path": record.path,
+                "extension": record.extension,
+                "size": record.size,
+            }
+            description = f"File with unrecognized extension '.{record.extension}': {record.path}"
+
+            if read_sample is not None:
+                sample = read_sample(record.path)
+                if sample:
+                    entropy = round(shannon_entropy(sample[:ENTROPY_SAMPLE_BYTES]), 2)
+                    raw_evidence["entropy_bits_per_byte"] = entropy
+                    if entropy >= HIGH_ENTROPY_THRESHOLD:
+                        description += (
+                            f" (high-entropy content, {entropy} bits/byte - "
+                            f"consistent with encrypted/compressed data)"
+                        )
+
             events.append(
                 Event(
                     timestamp=record.mtime,
                     source_extractor=SourceExtractor.FILESYSTEM,
                     event_type="file_extension_change",
-                    description=(
-                        f"File with unrecognized extension '.{record.extension}': {record.path}"
-                    ),
-                    raw_evidence={
-                        "path": record.path,
-                        "extension": record.extension,
-                        "size": record.size,
-                    },
+                    description=description,
+                    raw_evidence=raw_evidence,
                 )
             )
 

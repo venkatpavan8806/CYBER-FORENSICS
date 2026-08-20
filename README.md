@@ -52,6 +52,18 @@ ransomtrace analyze ./demo_incident --mode b --no-review -o report.html
 HTML report — every finding requires a human decision; nothing is presented
 as fact just because a rule fired.
 
+### Web review UI (alternative to the CLI flow)
+
+```bash
+streamlit run ransomtrace/validation/web_review.py
+```
+
+Same guarantee as the CLI flow (every finding needs an explicit analyst
+decision), but as a page in your browser: point it at an artifact folder or
+disk image, click Analyze, expand each finding to review its evidence and
+set Confirmed/False Positive/Uncertain, then generate and download the
+report. See [`validation/web_review.py`](ransomtrace/validation/web_review.py).
+
 ## Architecture
 
 ```
@@ -121,6 +133,16 @@ separate sequential steps rather than one instant).
 R4 is the project's core "novelty": it's what turns three independent,
 individually-weak signals into one high-confidence correlated finding — the
 cross-artifact correlation the capstone brief asks for.
+
+**Entropy corroboration (R1):** when real file content is available (Mode B's
+`files/` tree, or Mode A reading bytes off the disk image via `pytsk3`), R1
+samples up to 8KB of each unusually-extensioned file and computes its Shannon
+entropy. Real ciphertext sits close to the theoretical maximum of 8 bits/byte;
+plain text and most structured formats sit noticeably lower. A cluster whose
+average sampled entropy is ≥7.5 bits/byte gets its confidence bumped one level
+(capped at High) — independent corroboration that the burst really does look
+like encrypted output, not just an unrecognized extension. See
+`HIGH_ENTROPY_THRESHOLD` in [`extractors/filesystem.py`](ransomtrace/extractors/filesystem.py).
 
 ## Synthetic test data — how it was generated safely
 
@@ -227,15 +249,20 @@ Service), T1070.001 (Clear Windows Event Logs). See
 pytest
 ```
 
-35 tests across ingestion, all three extractors, all five correlation rules,
-validation, and report generation — including two full end-to-end tests
-(Mode A and Mode B) that generate the synthetic fixture, run the whole
-pipeline, and assert the correlated R4 finding fires.
+52 tests across ingestion, all three extractors (including entropy
+corroboration), all five correlation rules, both validation flows (CLI and
+the Streamlit web UI, the latter via Streamlit's official `AppTest` harness
+for real widget-interaction testing), and report generation — including
+end-to-end tests (Mode A, Mode B, and the web UI) that generate the
+synthetic fixture, run the whole pipeline, and assert the correlated R4
+finding fires.
 
 ## Chain of custody
 
 Every report embeds a SHA-256 hash of the analyzed input: a direct hash for
 a disk image, or a manifest hash (sorted `path:sha256` lines, then hashed
 again) for an artifact folder, so the hash is stable across machines and
-changes if any file's content, name, or presence changes. See
-[`report/generate.py`](ransomtrace/report/generate.py).
+changes if any file's content, name, or presence changes. The report's
+dedicated "Chain of custody" block also shows the tool version and, when the
+CLI or web UI supplies it, when processing started, when it completed, and
+how long it took. See [`report/generate.py`](ransomtrace/report/generate.py).

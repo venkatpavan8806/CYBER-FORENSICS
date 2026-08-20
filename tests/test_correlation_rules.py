@@ -66,6 +66,36 @@ def test_larger_burst_produces_higher_confidence():
     assert findings[0].confidence == "High"
 
 
+def test_high_entropy_evidence_bumps_confidence_one_level():
+    # BURST_MIN_FILES exactly -> base confidence is Low; high-entropy samples
+    # should bump it to Medium.
+    events = [_fs_event(i) for i in range(rules.BURST_MIN_FILES)]
+    for e in events:
+        e.raw_evidence["entropy_bits_per_byte"] = 7.9
+
+    findings = rules.rule_mass_rename_burst(events)
+    assert len(findings) == 1
+    assert findings[0].confidence == "Medium"
+
+
+def test_high_entropy_bump_is_capped_at_high():
+    events = [_fs_event(i) for i in range(rules.BURST_MIN_FILES * 3)]  # base = High
+    for e in events:
+        e.raw_evidence["entropy_bits_per_byte"] = 7.9
+
+    findings = rules.rule_mass_rename_burst(events)
+    assert findings[0].confidence == "High"
+
+
+def test_low_entropy_evidence_does_not_bump_confidence():
+    events = [_fs_event(i) for i in range(rules.BURST_MIN_FILES)]
+    for e in events:
+        e.raw_evidence["entropy_bits_per_byte"] = 1.0
+
+    findings = rules.rule_mass_rename_burst(events)
+    assert findings[0].confidence == "Low"
+
+
 def test_files_outside_window_are_not_merged_into_one_burst():
     near = [_fs_event(i) for i in range(rules.BURST_MIN_FILES)]
     far = [_fs_event(i) for i in range(1000, 1000 + rules.BURST_MIN_FILES)]

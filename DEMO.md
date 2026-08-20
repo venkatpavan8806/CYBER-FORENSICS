@@ -63,10 +63,23 @@ Open `demo_report.html` in a browser. Walk through:
   the correlation engine's core output: it only fires when a mass-encryption
   burst, a shadow-copy-deletion command, and a registry persistence entry
   all land within the same 30-minute window. Click to expand its evidence.
+- Expand a burst-detection (R1) event and point out the entropy line
+  (`high-entropy content, 7.9x bits/byte`) — the "encrypted" files are
+  `os.urandom()` output, so this is honest corroboration, not a canned string.
 - A couple of individual findings (R1/R2/R3) to show the granular evidence
   is still visible, not swallowed by the correlated finding.
 - The scope/limitations footer — be upfront that this is rule-based and not
   exhaustive.
+
+## 5.5. (Optional) Show the web review UI (60s)
+
+```bash
+streamlit run ransomtrace/validation/web_review.py
+```
+
+Same review guarantee as the CLI, in a browser: point it at `demo_run`,
+click Analyze, expand a finding, set it Confirmed, generate the report.
+Useful if the audience is more comfortable with a GUI than a terminal.
 
 ## 6. Show the tests (30s)
 

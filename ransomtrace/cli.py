@@ -7,6 +7,7 @@
 from __future__ import annotations
 
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 import click
@@ -42,6 +43,7 @@ def main() -> None:
 def analyze(path: str, mode: str, output: str, no_review: bool) -> None:
     """Analyze PATH (a disk image or an artifact folder) and produce a report."""
     click.echo(f"RansomTrace: analyzing {path!r} (mode {mode})")
+    processing_started_at = datetime.now(timezone.utc)
 
     if mode == "a":
         events = ingest_disk_image(path)
@@ -60,7 +62,10 @@ def analyze(path: str, mode: str, output: str, no_review: bool) -> None:
     else:
         review_findings_cli(findings)
 
-    report_path = generate_report(findings, input_path=path, output_path=output, mode=mode)
+    report_path = generate_report(
+        findings, input_path=path, output_path=output, mode=mode,
+        processing_started_at=processing_started_at,
+    )
     click.echo(f"Report written to {report_path}")
 
 

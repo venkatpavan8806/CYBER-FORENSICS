@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>RansomTrace Report - 2026-08-20T07:04:13.433886+00:00</title>
+<title>RansomTrace Report - 2026-08-20T09:17:12.192899+00:00</title>
 <style>
   :root {
     --bg: #0f1420; --panel: #161d2e; --border: #2a3348; --text: #e6e9f0;
@@ -16,7 +16,9 @@
   header .subtitle { color: var(--muted); font-size: 0.95rem; }
   .container { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
   .meta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-               gap: 0.75rem; margin-top: 1.5rem; }
+               gap: 0.75rem; margin-top: 0.75rem; }
+  .section-heading { font-size: 1rem; color: var(--muted); text-transform: uppercase;
+                      letter-spacing: 0.05em; margin: 2rem 0 0 0; }
   .meta-item { background: var(--panel); border: 1px solid var(--border); border-radius: 8px;
                padding: 0.75rem 1rem; }
   .meta-item .label { color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
@@ -65,10 +67,18 @@
   <div class="meta-grid">
     <div class="meta-item"><div class="label">Analyzed input</div><div class="value">examples\_sample_incident_data</div></div>
     <div class="meta-item"><div class="label">Ingestion mode</div><div class="value">b</div></div>
-    <div class="meta-item"><div class="label">SHA-256 (chain of custody)</div><div class="value">9d25f3003502a63fb79e2089b536e5ae26f94e0906884a70d0dc5066984e2597</div></div>
-    <div class="meta-item"><div class="label">Report generated</div><div class="value">2026-08-20T07:04:13.433886+00:00</div></div>
-    <div class="meta-item"><div class="label">Tool version</div><div class="value">RansomTrace 0.1.0</div></div>
     <div class="meta-item"><div class="label">Findings</div><div class="value">5 total</div></div>
+  </div>
+
+  <h2 class="section-heading">Chain of custody</h2>
+  <div class="meta-grid">
+    <div class="meta-item"><div class="label">SHA-256 (chain of custody)</div><div class="value">433fcc738b69622c5f0788a643bc3f07597c502b23882d7c21ef2e9e16d82956</div></div>
+    <div class="meta-item"><div class="label">Tool version</div><div class="value">RansomTrace 0.1.0</div></div>
+    
+    <div class="meta-item"><div class="label">Processing started</div><div class="value">2026-08-20T09:17:11.868077+00:00</div></div>
+    <div class="meta-item"><div class="label">Processing completed</div><div class="value">2026-08-20T09:17:12.192899+00:00</div></div>
+    <div class="meta-item"><div class="label">Processing elapsed</div><div class="value">0.32 seconds</div></div>
+    
   </div>
 
   <div class="limitations">
@@ -86,7 +96,7 @@
     <div class="finding-header">
       <h2 class="finding-title">Mass extension-change burst: .locked_demo (40 files)</h2>
       <div class="badges">
-        <span class="badge badge-confidence-medium">Medium confidence</span>
+        <span class="badge badge-confidence-high">High confidence</span>
         <span class="badge badge-status-confirmed">Confirmed</span>
         
         <span class="badge badge-mitre" title="Data Encrypted for Impact">T1486</span>
@@ -94,10 +104,10 @@
       </div>
     </div>
     <div class="finding-meta">
-      Rule R1 &middot; Finding ID R1-3c464586a4 &middot;
-      Window: 2026-08-20T07:04:13.219982+00:00 &ndash; 2026-08-20T07:05:31.219982+00:00
+      Rule R1 &middot; Finding ID R1-d6d95ed8f1 &middot;
+      Window: 2026-08-20T09:17:11.870077+00:00 &ndash; 2026-08-20T09:18:29.870077+00:00
     </div>
-    <p class="finding-description">40 files were changed to the unrecognized extension '.locked_demo' within a 10-minute window (2026-08-20T07:04:13.219982+00:00 to 2026-08-20T07:05:31.219982+00:00), consistent with mass file encryption.</p>
+    <p class="finding-description">40 files were changed to the unrecognized extension '.locked_demo' within a 10-minute window (2026-08-20T09:17:11.870077+00:00 to 2026-08-20T09:18:29.870077+00:00), consistent with mass file encryption.</p>
 
     
     <div class="analyst-note"><strong>Analyst note:</strong> Reviewed against the synthetic fixture - matches expected attack chain.</div>
@@ -107,243 +117,243 @@
       <summary>40 supporting event(s) &mdash; click to expand raw evidence</summary>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:13.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0000.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0000.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:11.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0000.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0000.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:15.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0001.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0001.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:13.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0001.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0001.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:17.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0002.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0002.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:15.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0002.locked_demo (high-entropy content, 7.97 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0002.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.97}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:19.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0003.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0003.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:17.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0003.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0003.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:21.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0004.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0004.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:19.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0004.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0004.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:23.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0005.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0005.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:21.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0005.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0005.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:25.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0006.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0006.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:23.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0006.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0006.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:27.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0007.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0007.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:25.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0007.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0007.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:29.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0008.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0008.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:27.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0008.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0008.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:31.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0009.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0009.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:29.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0009.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0009.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:33.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0010.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0010.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:31.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0010.locked_demo (high-entropy content, 7.97 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0010.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.97}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:35.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0011.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0011.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:33.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0011.locked_demo (high-entropy content, 7.97 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0011.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.97}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:37.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0012.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0012.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:35.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0012.locked_demo (high-entropy content, 7.97 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0012.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.97}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:39.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0013.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0013.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:37.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0013.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0013.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:41.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0014.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0014.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:39.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0014.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0014.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:43.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0015.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0015.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:41.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0015.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0015.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:45.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0016.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0016.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:43.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0016.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0016.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:47.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0017.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0017.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:45.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0017.locked_demo (high-entropy content, 7.97 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0017.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.97}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:49.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0018.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0018.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:47.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0018.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0018.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:51.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0019.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0019.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:49.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0019.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0019.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:53.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0020.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0020.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:51.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0020.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0020.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:55.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0021.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0021.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:53.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0021.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0021.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:57.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0022.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0022.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:55.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0022.locked_demo (high-entropy content, 7.97 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0022.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.97}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:59.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0023.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0023.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:57.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0023.locked_demo (high-entropy content, 7.97 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0023.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.97}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:01.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0024.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0024.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:59.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0024.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0024.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:03.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0025.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0025.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:18:01.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0025.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0025.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:05.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0026.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0026.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:18:03.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0026.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0026.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:07.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0027.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0027.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:18:05.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0027.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0027.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:09.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0028.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0028.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:18:07.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0028.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0028.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:11.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0029.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0029.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:18:09.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0029.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0029.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:13.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0030.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0030.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:18:11.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0030.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0030.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:15.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0031.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0031.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:18:13.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0031.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0031.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:17.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0032.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0032.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:18:15.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0032.locked_demo (high-entropy content, 7.97 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0032.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.97}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:19.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0033.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0033.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:18:17.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0033.locked_demo (high-entropy content, 7.97 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0033.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.97}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:21.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0034.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0034.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:18:19.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0034.locked_demo (high-entropy content, 7.97 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0034.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.97}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:23.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0035.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0035.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:18:21.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0035.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0035.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:25.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0036.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0036.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:18:23.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0036.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0036.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:27.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0037.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0037.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:18:25.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0037.locked_demo (high-entropy content, 7.97 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0037.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.97}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:29.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0038.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0038.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:18:27.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0038.locked_demo (high-entropy content, 7.97 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0038.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.97}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:31.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0039.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0039.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:18:29.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0039.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0039.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
     </details>
@@ -369,8 +379,8 @@
       </div>
     </div>
     <div class="finding-meta">
-      Rule R4 &middot; Finding ID R4-d456cfc903 &middot;
-      Window: 2026-08-20T07:04:13.219982+00:00 &ndash; 2026-08-20T07:05:36.219982+00:00
+      Rule R4 &middot; Finding ID R4-738c0b2ca5 &middot;
+      Window: 2026-08-20T09:17:11.870077+00:00 &ndash; 2026-08-20T09:18:34.870077+00:00
     </div>
     <p class="finding-description">Correlated attack chain: Mass extension-change burst: .locked_demo (40 files), combined with 1 shadow-copy-deletion finding(s) and 2 registry-persistence finding(s) within 30 minutes of each other. This cross-artifact pattern (mass encryption + backup destruction + persistence) is the signature sequence of a ransomware execution, not an isolated event.</p>
 
@@ -382,259 +392,259 @@
       <summary>43 supporting event(s) &mdash; click to expand raw evidence</summary>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:13.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0000.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0000.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:11.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0000.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0000.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:15.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0001.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0001.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:13.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0001.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0001.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:17.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0002.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0002.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:15.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0002.locked_demo (high-entropy content, 7.97 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0002.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.97}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:19.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0003.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0003.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:17.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0003.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0003.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:21.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0004.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0004.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:19.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0004.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0004.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:23.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0005.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0005.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:21.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0005.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0005.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:25.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0006.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0006.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:23.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0006.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0006.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:27.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0007.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0007.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:25.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0007.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0007.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:29.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0008.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0008.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:27.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0008.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0008.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:31.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0009.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0009.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:29.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0009.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0009.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:33.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0010.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0010.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:31.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0010.locked_demo (high-entropy content, 7.97 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0010.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.97}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:35.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0011.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0011.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:33.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0011.locked_demo (high-entropy content, 7.97 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0011.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.97}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:37.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0012.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0012.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:35.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0012.locked_demo (high-entropy content, 7.97 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0012.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.97}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:39.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0013.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0013.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:37.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0013.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0013.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:41.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0014.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0014.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:39.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0014.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0014.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:43.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0015.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0015.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:41.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0015.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0015.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:45.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0016.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0016.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:43.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0016.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0016.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:47.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0017.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0017.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:45.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0017.locked_demo (high-entropy content, 7.97 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0017.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.97}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:49.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0018.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0018.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:47.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0018.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0018.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:51.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0019.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0019.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:49.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0019.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0019.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:53.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0020.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0020.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:51.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0020.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0020.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:55.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0021.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0021.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:53.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0021.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0021.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:57.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0022.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0022.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:55.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0022.locked_demo (high-entropy content, 7.97 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0022.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.97}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:04:59.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0023.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0023.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:57.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0023.locked_demo (high-entropy content, 7.97 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0023.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.97}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:01.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0024.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0024.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:17:59.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0024.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0024.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:03.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0025.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0025.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:18:01.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0025.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0025.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:05.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0026.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0026.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:18:03.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0026.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0026.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:07.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0027.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0027.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:18:05.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0027.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0027.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:09.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0028.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0028.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:18:07.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0028.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0028.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:11.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0029.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0029.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:18:09.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0029.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0029.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:13.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0030.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0030.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:18:11.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0030.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0030.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:15.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0031.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0031.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:18:13.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0031.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0031.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:17.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0032.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0032.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:18:15.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0032.locked_demo (high-entropy content, 7.97 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0032.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.97}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:19.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0033.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0033.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:18:17.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0033.locked_demo (high-entropy content, 7.97 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0033.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.97}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:21.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0034.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0034.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:18:19.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0034.locked_demo (high-entropy content, 7.97 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0034.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.97}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:23.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0035.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0035.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:18:21.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0035.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0035.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:25.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0036.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0036.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:18:23.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0036.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0036.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:27.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0037.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0037.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:18:25.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0037.locked_demo (high-entropy content, 7.97 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0037.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.97}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:29.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0038.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0038.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:18:27.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0038.locked_demo (high-entropy content, 7.97 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0038.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.97}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T07:05:31.219982+00:00</div>
-        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0039.locked_demo</div>
-        <div class="ev-raw">{'path': 'invoice_0039.locked_demo', 'extension': 'locked_demo', 'size': 114}</div>
+        <div class="ev-desc">[filesystem / file_extension_change] 2026-08-20T09:18:29.870077+00:00</div>
+        <div class="ev-desc">File with unrecognized extension '.locked_demo': invoice_0039.locked_demo (high-entropy content, 7.98 bits/byte - consistent with encrypted/compressed data)</div>
+        <div class="ev-raw">{'path': 'invoice_0039.locked_demo', 'extension': 'locked_demo', 'size': 16461, 'entropy_bits_per_byte': 7.98}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[eventlog_vss / shadow_copy_deletion_command] 2026-08-20T07:05:36.219982+00:00</div>
+        <div class="ev-desc">[eventlog_vss / shadow_copy_deletion_command] 2026-08-20T09:18:34.870077+00:00</div>
         <div class="ev-desc">Shadow-copy/recovery-tampering command evidence: New Process Name: C:\Windows\System32\vssadmin.exe vssadmin.exe delete shadows /all /quiet Microsoft-Windows-Security-Auditing</div>
-        <div class="ev-raw">{'source_file': 'examples\\_sample_incident_data\\eventlogs\\synthetic_events.json', 'timestamp': '2026-08-20T07:05:36.219982+00:00', 'event_id': 4688, 'provider': 'Microsoft-Windows-Security-Auditing', 'description': 'New Process Name: C:\\Windows\\System32\\vssadmin.exe', 'command_line': 'vssadmin.exe delete shadows /all /quiet'}</div>
+        <div class="ev-raw">{'source_file': 'examples\\_sample_incident_data\\eventlogs\\synthetic_events.json', 'timestamp': '2026-08-20T09:18:34.870077+00:00', 'event_id': 4688, 'provider': 'Microsoft-Windows-Security-Auditing', 'description': 'New Process Name: C:\\Windows\\System32\\vssadmin.exe', 'command_line': 'vssadmin.exe delete shadows /all /quiet'}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[registry / run_key_persistence] 2026-08-20T07:04:13.386474+00:00</div>
+        <div class="ev-desc">[registry / run_key_persistence] 2026-08-20T09:17:12.148122+00:00</div>
         <div class="ev-desc">Autostart value 'SecurityUpdate' added under \Software\Microsoft\Windows\CurrentVersion\Run: C:\Users\Public\svchost_update.exe</div>
         <div class="ev-raw">{'hive_file': 'examples\\_sample_incident_data\\registry\\synthetic_system_software.hiv', 'key_path': '\\Software\\Microsoft\\Windows\\CurrentVersion\\Run', 'value_name': 'SecurityUpdate', 'value_data': 'C:\\Users\\Public\\svchost_update.exe'}</div>
       </div>
       
       <div class="evidence-item">
-        <div class="ev-desc">[registry / suspicious_service_created] 2026-08-20T07:04:13.386474+00:00</div>
+        <div class="ev-desc">[registry / suspicious_service_created] 2026-08-20T09:17:12.148122+00:00</div>
         <div class="ev-desc">Service 'WinDefenderHelperSvc' created with ImagePath outside standard system directories: C:\Users\Public\svchost_update.exe</div>
         <div class="ev-raw">{'hive_file': 'examples\\_sample_incident_data\\registry\\synthetic_system_software.hiv', 'key_path': '\\Services\\WinDefenderHelperSvc', 'service_name': 'WinDefenderHelperSvc', 'image_path': 'C:\\Users\\Public\\svchost_update.exe'}</div>
       </div>
@@ -656,8 +666,8 @@
       </div>
     </div>
     <div class="finding-meta">
-      Rule R3 &middot; Finding ID R3-c4604ed891 &middot;
-      Window: 2026-08-20T07:04:13.386474+00:00 &ndash; 2026-08-20T07:04:13.386474+00:00
+      Rule R3 &middot; Finding ID R3-363dad95ed &middot;
+      Window: 2026-08-20T09:17:12.148122+00:00 &ndash; 2026-08-20T09:17:12.148122+00:00
     </div>
     <p class="finding-description">Autostart value 'SecurityUpdate' added under \Software\Microsoft\Windows\CurrentVersion\Run: C:\Users\Public\svchost_update.exe</p>
 
@@ -669,7 +679,7 @@
       <summary>1 supporting event(s) &mdash; click to expand raw evidence</summary>
       
       <div class="evidence-item">
-        <div class="ev-desc">[registry / run_key_persistence] 2026-08-20T07:04:13.386474+00:00</div>
+        <div class="ev-desc">[registry / run_key_persistence] 2026-08-20T09:17:12.148122+00:00</div>
         <div class="ev-desc">Autostart value 'SecurityUpdate' added under \Software\Microsoft\Windows\CurrentVersion\Run: C:\Users\Public\svchost_update.exe</div>
         <div class="ev-raw">{'hive_file': 'examples\\_sample_incident_data\\registry\\synthetic_system_software.hiv', 'key_path': '\\Software\\Microsoft\\Windows\\CurrentVersion\\Run', 'value_name': 'SecurityUpdate', 'value_data': 'C:\\Users\\Public\\svchost_update.exe'}</div>
       </div>
@@ -691,8 +701,8 @@
       </div>
     </div>
     <div class="finding-meta">
-      Rule R3 &middot; Finding ID R3-49994a90c2 &middot;
-      Window: 2026-08-20T07:04:13.386474+00:00 &ndash; 2026-08-20T07:04:13.386474+00:00
+      Rule R3 &middot; Finding ID R3-8c18d7b7b8 &middot;
+      Window: 2026-08-20T09:17:12.148122+00:00 &ndash; 2026-08-20T09:17:12.148122+00:00
     </div>
     <p class="finding-description">Service 'WinDefenderHelperSvc' created with ImagePath outside standard system directories: C:\Users\Public\svchost_update.exe</p>
 
@@ -704,7 +714,7 @@
       <summary>1 supporting event(s) &mdash; click to expand raw evidence</summary>
       
       <div class="evidence-item">
-        <div class="ev-desc">[registry / suspicious_service_created] 2026-08-20T07:04:13.386474+00:00</div>
+        <div class="ev-desc">[registry / suspicious_service_created] 2026-08-20T09:17:12.148122+00:00</div>
         <div class="ev-desc">Service 'WinDefenderHelperSvc' created with ImagePath outside standard system directories: C:\Users\Public\svchost_update.exe</div>
         <div class="ev-raw">{'hive_file': 'examples\\_sample_incident_data\\registry\\synthetic_system_software.hiv', 'key_path': '\\Services\\WinDefenderHelperSvc', 'service_name': 'WinDefenderHelperSvc', 'image_path': 'C:\\Users\\Public\\svchost_update.exe'}</div>
       </div>
@@ -724,8 +734,8 @@
       </div>
     </div>
     <div class="finding-meta">
-      Rule R2 &middot; Finding ID R2-a632ba9a78 &middot;
-      Window: 2026-08-20T07:05:36.219982+00:00 &ndash; 2026-08-20T07:05:36.219982+00:00
+      Rule R2 &middot; Finding ID R2-cb619cfb60 &middot;
+      Window: 2026-08-20T09:18:34.870077+00:00 &ndash; 2026-08-20T09:18:34.870077+00:00
     </div>
     <p class="finding-description">Shadow-copy/recovery-tampering command evidence: New Process Name: C:\Windows\System32\vssadmin.exe vssadmin.exe delete shadows /all /quiet Microsoft-Windows-Security-Auditing</p>
 
@@ -737,9 +747,9 @@
       <summary>1 supporting event(s) &mdash; click to expand raw evidence</summary>
       
       <div class="evidence-item">
-        <div class="ev-desc">[eventlog_vss / shadow_copy_deletion_command] 2026-08-20T07:05:36.219982+00:00</div>
+        <div class="ev-desc">[eventlog_vss / shadow_copy_deletion_command] 2026-08-20T09:18:34.870077+00:00</div>
         <div class="ev-desc">Shadow-copy/recovery-tampering command evidence: New Process Name: C:\Windows\System32\vssadmin.exe vssadmin.exe delete shadows /all /quiet Microsoft-Windows-Security-Auditing</div>
-        <div class="ev-raw">{'source_file': 'examples\\_sample_incident_data\\eventlogs\\synthetic_events.json', 'timestamp': '2026-08-20T07:05:36.219982+00:00', 'event_id': 4688, 'provider': 'Microsoft-Windows-Security-Auditing', 'description': 'New Process Name: C:\\Windows\\System32\\vssadmin.exe', 'command_line': 'vssadmin.exe delete shadows /all /quiet'}</div>
+        <div class="ev-raw">{'source_file': 'examples\\_sample_incident_data\\eventlogs\\synthetic_events.json', 'timestamp': '2026-08-20T09:18:34.870077+00:00', 'event_id': 4688, 'provider': 'Microsoft-Windows-Security-Auditing', 'description': 'New Process Name: C:\\Windows\\System32\\vssadmin.exe', 'command_line': 'vssadmin.exe delete shadows /all /quiet'}</div>
       </div>
       
     </details>

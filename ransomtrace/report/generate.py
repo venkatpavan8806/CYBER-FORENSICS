@@ -59,8 +59,15 @@ def generate_report(
     input_path: str | Path,
     output_path: str | Path,
     mode: str,
+    processing_started_at: datetime | None = None,
 ) -> Path:
-    """Render the validated findings to a self-contained HTML report."""
+    """Render the validated findings to a self-contained HTML report.
+
+    `processing_started_at`, if given (the CLI records this right before
+    ingestion begins), lets the report's chain-of-custody block show how long
+    extraction + correlation took, alongside the hash and tool version - part
+    of the SHOULD-HAVE chain-of-custody metadata block (Section 8 #12).
+    """
     env = jinja2.Environment(
         loader=jinja2.FileSystemLoader(str(TEMPLATE_DIR)),
         autoescape=jinja2.select_autoescape(["html"]),
@@ -68,11 +75,21 @@ def generate_report(
     env.filters["technique_name"] = technique_name
     template = env.get_template("report.html.j2")
 
+    completed_at = datetime.now(timezone.utc)
+    elapsed_seconds = (
+        (completed_at - processing_started_at).total_seconds()
+        if processing_started_at is not None
+        else None
+    )
+
     html = template.render(
         findings=findings,
         input_path=str(input_path),
         input_hash=hash_input(input_path),
-        generated_at=datetime.now(timezone.utc).isoformat(),
+        hash_algorithm="SHA-256",
+        generated_at=completed_at.isoformat(),
+        processing_started_at=processing_started_at.isoformat() if processing_started_at else None,
+        processing_elapsed_seconds=elapsed_seconds,
         tool_version=TOOL_VERSION,
         mode=mode,
     )

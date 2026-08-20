@@ -80,3 +80,27 @@ def test_generate_report_with_no_findings_shows_empty_state(tmp_path):
     output_path = generate_report([], input_path=input_dir, output_path=tmp_path / "report.html", mode="b")
     html = output_path.read_text(encoding="utf-8")
     assert "No findings were produced" in html
+
+
+def test_report_without_processing_started_at_shows_plain_generated_timestamp(tmp_path):
+    input_dir = tmp_path / "artifacts"
+    input_dir.mkdir()
+    output_path = generate_report([], input_path=input_dir, output_path=tmp_path / "report.html", mode="b")
+    html = output_path.read_text(encoding="utf-8")
+    assert "Report generated" in html
+    assert "Processing started" not in html
+
+
+def test_report_with_processing_started_at_shows_elapsed_time(tmp_path):
+    input_dir = tmp_path / "artifacts"
+    input_dir.mkdir()
+    started = datetime(2026, 1, 1, 12, 0, 0, tzinfo=timezone.utc)
+    output_path = generate_report(
+        [], input_path=input_dir, output_path=tmp_path / "report.html", mode="b",
+        processing_started_at=started,
+    )
+    html = output_path.read_text(encoding="utf-8")
+    assert "Processing started" in html
+    assert "Processing completed" in html
+    assert "Processing elapsed" in html
+    assert started.isoformat() in html

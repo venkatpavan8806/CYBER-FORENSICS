@@ -46,12 +46,34 @@ def _finding_id(rule_id: str, *parts: str) -> str:
     return f"{rule_id}-{digest}"
 
 
-def _burst_confidence(count: int, threshold: int) -> str:
+_CONFIDENCE_LEVELS = ["Low", "Medium", "High"]
+
+
+def _burst_confidence(count: int, threshold: int, cluster: list[Event] | None = None) -> str:
     if count >= threshold * 3:
-        return "High"
-    if count >= threshold * 1.5:
-        return "Medium"
-    return "Low"
+        level = "High"
+    elif count >= threshold * 1.5:
+        level = "Medium"
+    else:
+        level = "Low"
+
+    # Entropy corroboration (SHOULD-HAVE, Section 8 #11): if we sampled real
+    # file content and it reads as high-entropy (see extractors/filesystem.py
+    # HIGH_ENTROPY_THRESHOLD), that's independent evidence this really is
+    # encrypted output rather than an unrelated bulk rename - bump confidence
+    # one level, capped at High. Events without an entropy sample (no read
+    # access to the file content) simply don't participate in the average.
+    if cluster:
+        entropies = [
+            e.raw_evidence["entropy_bits_per_byte"]
+            for e in cluster
+            if "entropy_bits_per_byte" in e.raw_evidence
+        ]
+        if entropies and (sum(entropies) / len(entropies)) >= 7.5:
+            idx = min(_CONFIDENCE_LEVELS.index(level) + 1, len(_CONFIDENCE_LEVELS) - 1)
+            level = _CONFIDENCE_LEVELS[idx]
+
+    return level
 
 
 def _time_clusters(
@@ -96,7 +118,7 @@ def rule_mass_rename_burst(events: list[Event]) -> list[Finding]:
         for cluster in _time_clusters(ext_events, window, BURST_MIN_FILES):
             window_start = min(e.timestamp for e in cluster)
             window_end = max(e.timestamp for e in cluster)
-            confidence = _burst_confidence(len(cluster), BURST_MIN_FILES)
+            confidence = _burst_confidence(len(cluster), BURST_MIN_FILES, cluster)
             findings.append(
                 Finding(
                     finding_id=_finding_id("R1", ext, window_start.isoformat()),

@@ -1,0 +1,15 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "ransomtrace-web-review",
+      "runtimeExecutable": ".venv\\Scripts\\streamlit.exe",
+      "runtimeArgs": [
+        "run",
+        "ransomtrace/validation/web_review.py",
+        "--server.headless=true"
+      ],
+      "port": 8501
+    }
+  ]
+}

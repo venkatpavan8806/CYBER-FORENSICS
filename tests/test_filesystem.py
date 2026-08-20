@@ -1,6 +1,11 @@
+import os
 from datetime import datetime, timezone
 
-from ransomtrace.extractors.filesystem import FileRecord, extract_filesystem_events
+from ransomtrace.extractors.filesystem import (
+    FileRecord,
+    extract_filesystem_events,
+    shannon_entropy,
+)
 from ransomtrace.models import SourceExtractor
 
 
@@ -48,3 +53,46 @@ def test_normal_filename_is_not_flagged_as_ransom_note():
 def test_file_with_no_extension_is_ignored():
     events = extract_filesystem_events([_record("Makefile", "")])
     assert events == []
+
+
+def test_shannon_entropy_of_empty_bytes_is_zero():
+    assert shannon_entropy(b"") == 0.0
+
+
+def test_shannon_entropy_of_repeated_byte_is_zero():
+    assert shannon_entropy(b"a" * 1000) == 0.0
+
+
+def test_shannon_entropy_of_random_bytes_is_high():
+    assert shannon_entropy(os.urandom(4096)) > 7.5
+
+
+def test_extension_change_without_read_sample_has_no_entropy_field():
+    events = extract_filesystem_events([_record("a.locked_demo", "locked_demo")])
+    assert "entropy_bits_per_byte" not in events[0].raw_evidence
+
+
+def test_extension_change_with_high_entropy_sample_is_annotated():
+    events = extract_filesystem_events(
+        [_record("a.locked_demo", "locked_demo")],
+        read_sample=lambda path: os.urandom(8192),
+    )
+    assert events[0].raw_evidence["entropy_bits_per_byte"] > 7.5
+    assert "high-entropy" in events[0].description
+
+
+def test_extension_change_with_low_entropy_sample_is_not_annotated_as_high_entropy():
+    events = extract_filesystem_events(
+        [_record("a.locked_demo", "locked_demo")],
+        read_sample=lambda path: b"a" * 8192,
+    )
+    assert events[0].raw_evidence["entropy_bits_per_byte"] < 7.5
+    assert "high-entropy" not in events[0].description
+
+
+def test_read_sample_returning_none_does_not_crash():
+    events = extract_filesystem_events(
+        [_record("a.locked_demo", "locked_demo")],
+        read_sample=lambda path: None,
+    )
+    assert "entropy_bits_per_byte" not in events[0].raw_evidence

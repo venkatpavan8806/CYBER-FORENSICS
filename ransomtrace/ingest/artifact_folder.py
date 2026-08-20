@@ -21,7 +21,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from ransomtrace.extractors.eventlog_vss import extract_eventlog_events
-from ransomtrace.extractors.filesystem import FileRecord, extract_filesystem_events
+from ransomtrace.extractors.filesystem import (
+    ENTROPY_SAMPLE_BYTES,
+    FileRecord,
+    extract_filesystem_events,
+)
 from ransomtrace.extractors.registry import extract_registry_events
 from ransomtrace.models import Event
 
@@ -58,18 +62,31 @@ def _walk_files_directory(files_dir: Path) -> list[FileRecord]:
     return records
 
 
+def _make_sample_reader(files_dir: Path):
+    def _read_sample(rel_path: str) -> bytes | None:
+        try:
+            with (files_dir / rel_path).open("rb") as f:
+                return f.read(ENTROPY_SAMPLE_BYTES)
+        except OSError:
+            return None
+
+    return _read_sample
+
+
 def _collect_filesystem_events(root: Path) -> list[Event]:
     filelist_csv = root / "filelist.csv"
     files_dir = root / "files"
 
     if filelist_csv.exists():
+        # filelist.csv describes filesystem state without guaranteeing real
+        # file content is available, so no entropy sampling here.
         records = _read_filelist_csv(filelist_csv)
+        return extract_filesystem_events(records)
     elif files_dir.is_dir():
         records = _walk_files_directory(files_dir)
+        return extract_filesystem_events(records, read_sample=_make_sample_reader(files_dir))
     else:
-        records = []
-
-    return extract_filesystem_events(records)
+        return extract_filesystem_events([])
 
 
 def _collect_registry_events(root: Path) -> list[Event]:

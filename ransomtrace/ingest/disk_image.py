@@ -32,7 +32,11 @@ from pathlib import Path
 import pytsk3
 
 from ransomtrace.extractors.eventlog_vss import extract_eventlog_events
-from ransomtrace.extractors.filesystem import FileRecord, extract_filesystem_events
+from ransomtrace.extractors.filesystem import (
+    ENTROPY_SAMPLE_BYTES,
+    FileRecord,
+    extract_filesystem_events,
+)
 from ransomtrace.extractors.registry import extract_registry_events
 from ransomtrace.models import Event
 
@@ -115,6 +119,18 @@ def _read_file_bytes(fs_info: pytsk3.FS_Info, path: str) -> bytes | None:
         return None
 
 
+def _make_sample_reader(fs_info: pytsk3.FS_Info):
+    def _read_sample(path: str) -> bytes | None:
+        try:
+            f = fs_info.open(path)
+            size = min(f.info.meta.size, ENTROPY_SAMPLE_BYTES)
+            return f.read_random(0, size)
+        except Exception:
+            return None
+
+    return _read_sample
+
+
 def _extract_registry_events_from_image(fs_info: pytsk3.FS_Info, tmp_dir: Path) -> list[Event]:
     events: list[Event] = []
     hive_image_paths = list(REGISTRY_HIVE_PATHS)
@@ -173,7 +189,9 @@ def ingest_disk_image(image_path: str | Path) -> list[Event]:
     with tempfile.TemporaryDirectory(prefix="ransomtrace_modea_") as tmp:
         tmp_dir = Path(tmp)
         events: list[Event] = []
-        events.extend(extract_filesystem_events(_walk_files(fs_info)))
+        events.extend(
+            extract_filesystem_events(_walk_files(fs_info), read_sample=_make_sample_reader(fs_info))
+        )
         events.extend(_extract_registry_events_from_image(fs_info, tmp_dir))
         events.extend(_extract_eventlog_events_from_image(fs_info, tmp_dir))
         return events
