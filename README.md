@@ -52,17 +52,24 @@ ransomtrace analyze ./demo_incident --mode b --no-review -o report.html
 HTML report — every finding requires a human decision; nothing is presented
 as fact just because a rule fired.
 
-### Web review UI (alternative to the CLI flow)
+### Web UI (no command line, no technical knowledge required)
 
-```bash
-streamlit run ransomtrace/validation/web_review.py
-```
+Double-click **`Run RansomTrace.bat`** in the project root. It sets up the
+environment on first run, then opens RansomTrace in your browser - no typed
+commands at any point.
 
-Same guarantee as the CLI flow (every finding needs an explicit analyst
-decision), but as a page in your browser: point it at an artifact folder or
-disk image, click Analyze, expand each finding to review its evidence and
-set Confirmed/False Positive/Uncertain, then generate and download the
-report. See [`validation/web_review.py`](ransomtrace/validation/web_review.py).
+Same underlying guarantee as the CLI flow (every finding needs an explicit
+human decision before the report treats it as confirmed), but built for
+someone with no forensics or coding background: native "Choose a folder..."
+/ "Choose a disk image file..." buttons instead of typed paths, a
+"Try a sample incident" button that needs no real evidence at all, a
+plain-English sentence and an up-front risk verdict for every finding before
+any jargon, and a collapsed "Technical details" section (rule ID, MITRE
+codes, raw evidence) for anyone who wants to go deeper. See
+[`validation/web_review.py`](ransomtrace/validation/web_review.py).
+
+Prefer the command line? `streamlit run ransomtrace/validation/web_review.py`
+works the same way, manually.
 
 ## Architecture
 

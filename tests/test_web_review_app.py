@@ -27,22 +27,33 @@ def test_analyze_and_confirm_finding_flows_into_report(tmp_path):
     at.run()
     assert not at.exception
 
-    sidebar_path_input = next(w for w in at.text_input if w.label == "Path")
-    sidebar_path_input.set_value(str(incident_dir))
-    analyze_button = next(w for w in at.button if w.label == "Analyze")
-    analyze_button.click().run()
+    path_input = next(w for w in at.text_input if w.label == "Or paste a path here")
+    path_input.set_value(str(incident_dir))
+    check_button = next(w for w in at.button if w.label == "Check for ransomware")
+    check_button.click().run()
     assert not at.exception
-    assert "finding(s) produced" in at.sidebar.success[0].value
+    assert "found to review" in at.success[0].value
 
-    # Confirm the first finding (options: Unreviewed/Confirmed/False Positive/Uncertain).
-    at.radio[0].set_value("Confirmed")
-    report_path_input = next(w for w in at.text_input if w.label == "Report output path")
+    # Confirm the first finding (plain-language options shown to the user).
+    at.radio[0].set_value("Yes, this is real")
+    report_path_input = next(w for w in at.text_input if w.label == "Save report as")
     report_path = tmp_path / "report.html"
     report_path_input.set_value(str(report_path))
-    generate_button = next(w for w in at.button if w.label == "Generate report")
-    generate_button.click().run()
+    save_button = next(w for w in at.button if w.label == "Save report")
+    save_button.click().run()
     assert not at.exception
 
     assert report_path.exists()
     html = report_path.read_text(encoding="utf-8")
     assert 'badge badge-status-confirmed">Confirmed' in html
+
+
+def test_sample_incident_button_runs_end_to_end(tmp_path):
+    at = AppTest.from_file(str(APP_PATH), default_timeout=30)
+    at.run()
+    assert not at.exception
+
+    sample_button = next(w for w in at.button if w.label == "Try a sample incident")
+    sample_button.click().run()
+    assert not at.exception
+    assert "found to review" in at.success[0].value
