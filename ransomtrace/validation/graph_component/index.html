@@ -95,7 +95,8 @@ function render(args) {
 
   let s = '<svg viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg">';
   s += '<defs>' +
-    '<radialGradient id="orb" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="#e6ccff"/><stop offset=".45" stop-color="#9b5cff"/><stop offset="1" stop-color="#3a1590"/></radialGradient>' +
+    '<radialGradient id="orb" cx="38%" cy="32%" r="80%"><stop offset="0" stop-color="#4a6a7a"/><stop offset=".55" stop-color="#1c3442"/><stop offset="1" stop-color="#0a1620"/></radialGradient>' +
+    '<linearGradient id="sweep" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#46e0d0" stop-opacity="0"/><stop offset="1" stop-color="#46e0d0" stop-opacity=".55"/></linearGradient>' +
     '<radialGradient id="disc" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#000" stop-opacity=".55"/><stop offset=".8" stop-color="#000" stop-opacity=".25"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>' +
     '<linearGradient id="gold" gradientUnits="userSpaceOnUse" x1="' + fanX0 + '" y1="0" x2="640" y2="0"><stop offset="0" stop-color="' + GOLD + '" stop-opacity=".95"/><stop offset="1" stop-color="' + GOLD + '" stop-opacity=".3"/></linearGradient>' +
     '<filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>' +
@@ -106,17 +107,26 @@ function render(args) {
   // orb + disc
   s += '<circle cx="' + orbX + '" cy="' + cy + '" r="106" fill="url(#disc)"/>';
   s += '<circle cx="' + orbX + '" cy="' + cy + '" r="106" fill="none" stroke="rgba(255,255,255,.07)"/>';
-  s += '<circle cx="' + orbX + '" cy="' + orbY + '" r="56" fill="none" stroke="rgba(190,160,255,.18)"/>';
+  s += '<circle cx="' + orbX + '" cy="' + orbY + '" r="56" fill="none" stroke="rgba(70,224,208,.2)"/>';
   [0, 2].forEach(function (b) {
-    s += '<circle cx="' + orbX + '" cy="' + orbY + '" r="32" fill="none" stroke="#b98cff" stroke-width="1" opacity="0">' +
+    s += '<circle cx="' + orbX + '" cy="' + orbY + '" r="32" fill="none" stroke="#46e0d0" stroke-width="1" opacity="0">' +
       '<animate attributeName="r" values="32;66" dur="4s" begin="' + b + 's" repeatCount="indefinite"/>' +
       '<animate attributeName="opacity" values=".5;0" dur="4s" begin="' + b + 's" repeatCount="indefinite"/></circle>';
   });
   s += '<g><animateTransform attributeName="transform" type="rotate" from="0 ' + orbX + ' ' + orbY + '" to="360 ' + orbX + ' ' + orbY + '" dur="46s" repeatCount="indefinite"/>' +
-    '<text font-size="7.5" fill="rgba(205,180,255,.6)" letter-spacing="2"><textPath href="#ring" textLength="350" lengthAdjust="spacing">RANSOMTRACE · EVIDENCE CASE · RANSOMTRACE · EVIDENCE CASE · RANSOMTRACE · EVIDENCE</textPath></text></g>';
+    '<text font-size="7.5" fill="rgba(120,230,220,.6)" letter-spacing="2"><textPath href="#ring" textLength="350" lengthAdjust="spacing">DISK EVIDENCE · FORENSIC SCAN · FILES · REGISTRY · LOGS · DISK EVIDENCE · FORENSIC SCAN</textPath></text></g>';
+  // disk platter with a scanning sweep: a drive being examined
   s += '<g class="' + (first ? 'orbin' : '') + '">' +
-    '<circle class="orbglow" cx="' + orbX + '" cy="' + orbY + '" r="30" fill="#9b5cff" opacity=".55" filter="url(#soft)"><animate attributeName="r" values="30;35;30" dur="4s" repeatCount="indefinite"/></circle>' +
-    '<circle cx="' + orbX + '" cy="' + orbY + '" r="30" fill="url(#orb)"><animate attributeName="r" values="30;32;30" dur="4s" repeatCount="indefinite"/></circle></g>';
+    '<circle class="orbglow" cx="' + orbX + '" cy="' + orbY + '" r="30" fill="#2fc7b8" opacity=".35" filter="url(#soft)"><animate attributeName="r" values="30;35;30" dur="4s" repeatCount="indefinite"/></circle>' +
+    '<circle cx="' + orbX + '" cy="' + orbY + '" r="31" fill="url(#orb)" stroke="#5fe8da" stroke-opacity=".55" stroke-width="1.2"/>' +
+    '<circle cx="' + orbX + '" cy="' + orbY + '" r="25" fill="none" stroke="#5fe8da" stroke-opacity=".28"/>' +
+    '<circle cx="' + orbX + '" cy="' + orbY + '" r="19" fill="none" stroke="#5fe8da" stroke-opacity=".28"/>' +
+    '<circle cx="' + orbX + '" cy="' + orbY + '" r="13" fill="none" stroke="#5fe8da" stroke-opacity=".28"/>' +
+    '<g><animateTransform attributeName="transform" type="rotate" from="0 ' + orbX + ' ' + orbY + '" to="360 ' + orbX + ' ' + orbY + '" dur="5s" repeatCount="indefinite"/>' +
+    '<path d="M' + orbX + ',' + orbY + ' L' + (orbX + 31) + ',' + orbY + ' A31,31 0 0 0 ' + (orbX + 31 * Math.cos(-0.9)).toFixed(2) + ',' + (orbY + 31 * Math.sin(-0.9)).toFixed(2) + ' Z" fill="url(#sweep)"/>' +
+    '<line x1="' + orbX + '" y1="' + orbY + '" x2="' + (orbX + 31) + '" y2="' + orbY + '" stroke="#8ff5ea" stroke-width="1.2" stroke-opacity=".9"/></g>' +
+    '<circle cx="' + orbX + '" cy="' + orbY + '" r="6" fill="#06101a" stroke="#5fe8da" stroke-opacity=".7"/>' +
+    '<circle cx="' + orbX + '" cy="' + orbY + '" r="2" fill="#5fe8da"/></g>';
   s += '<text x="' + orbX + '" y="' + (orbY + 76) + '" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">' + esc(trunc(kase.name, 22)) + '</text>';
   s += '<text x="' + orbX + '" y="' + (orbY + 91) + '" text-anchor="middle" font-size="9.5" fill="#94a1b8">' + esc(kase.sub) + '</text>';
   const rtone = TONES[kase.risk] || TONES.none;
