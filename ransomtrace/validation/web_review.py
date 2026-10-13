@@ -403,6 +403,20 @@ def _run_app() -> None:  # pragma: no cover - exercised via `streamlit run` / Ap
             unsafe_allow_html=True,
         )
 
+    if st.session_state.rt_input_path:
+        kind = "Disk image" if st.session_state.rt_mode == "a" else "Evidence folder"
+        st.markdown(
+            '<div style="display:flex;gap:10px;align-items:center;margin:2px 0 10px;padding:8px 14px;'
+            'border-radius:12px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);'
+            'font-size:.85rem;color:#94a1b8;overflow:hidden">'
+            f'<span style="color:#5fe8da;font-weight:600;white-space:nowrap">Viewing · {kind}</span>'
+            f'<span title="{escape(st.session_state.rt_input_path)}" style="color:#e6edf7;'
+            f'font-family:ui-monospace,Consolas,monospace;white-space:nowrap;overflow:hidden;'
+            f'text-overflow:ellipsis;direction:rtl;text-align:left">'
+            f'<bdi>{escape(st.session_state.rt_input_path)}</bdi></span></div>',
+            unsafe_allow_html=True,
+        )
+
     # ---- dashboard --------------------------------------------------------
     findings = st.session_state.rt_findings
     events = st.session_state.rt_events
