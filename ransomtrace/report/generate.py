@@ -16,6 +16,7 @@ import jinja2
 
 from ransomtrace.correlation.mitre_map import technique_name
 from ransomtrace.models import Finding
+from ransomtrace.plain_language import friendly_time, plain_event
 
 TOOL_VERSION = "0.1.0"
 TEMPLATE_DIR = Path(__file__).parent / "templates"
@@ -73,6 +74,8 @@ def generate_report(
         autoescape=jinja2.select_autoescape(["html"]),
     )
     env.filters["technique_name"] = technique_name
+    env.filters["plain_event"] = plain_event
+    env.filters["friendly_time"] = friendly_time
     template = env.get_template("report.html.j2")
 
     completed_at = datetime.now(timezone.utc)

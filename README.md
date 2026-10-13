@@ -35,16 +35,16 @@ This installs the `ransomtrace` command.
 
 ```bash
 # Generate the benign synthetic test fixture (Mode B folder + optional Mode A image)
-ransomtrace simulate ./demo_incident --disk-image
+ransomtrace simulate ./demo_run --disk-image
 
 # Analyze a pre-extracted artifact folder
-ransomtrace analyze ./demo_incident --mode b -o report.html
+ransomtrace analyze ./demo_run --mode b -o report.html
 
 # Analyze a raw disk image
-ransomtrace analyze ./demo_incident/synthetic_incident.raw --mode a -o report.html
+ransomtrace analyze ./demo_run/synthetic_incident.raw --mode a -o report.html
 
 # Non-interactive (skips the CLI validation step - for CI/testing)
-ransomtrace analyze ./demo_incident --mode b --no-review -o report.html
+ransomtrace analyze ./demo_run --mode b --no-review -o report.html
 ```
 
 `analyze` walks you through each finding in the terminal
@@ -60,7 +60,7 @@ commands at any point.
 
 Same underlying guarantee as the CLI flow (every finding needs an explicit
 human decision before the report treats it as confirmed), but built for
-someone with no forensics or coding background: native "Choose a folder..."
+someone with no forensics or coding background, styled as a dark node-graph dashboard (case orb -> evidence categories -> a fan of findings; click any node to inspect it in the glass detail panel on the right): native "Choose a folder..."
 / "Choose a disk image file..." buttons instead of typed paths, a
 "Try a sample incident" button that needs no real evidence at all, a
 plain-English sentence and an up-front risk verdict for every finding before
@@ -68,8 +68,10 @@ any jargon, and a collapsed "Technical details" section (rule ID, MITRE
 codes, raw evidence) for anyone who wants to go deeper. See
 [`validation/web_review.py`](ransomtrace/validation/web_review.py).
 
-Prefer the command line? `streamlit run ransomtrace/validation/web_review.py`
-works the same way, manually.
+This dashboard is the primary interface for non-technical users; the CLI
+(`ransomtrace analyze ...`) remains for scripted and terminal use. To start the
+dashboard manually instead of using the launcher:
+`streamlit run ransomtrace/validation/web_review.py` (http://localhost:8501).
 
 ## Architecture
 
@@ -88,16 +90,22 @@ ransomtrace/
     mitre_map.py             ATT&CK technique ID -> name
   validation/
     cli_review.py           terminal Confirm / False Positive / Uncertain flow
+    web_review.py           Streamlit dashboard: node-graph view + detail panel + review
+    dashboard_data.py       pure data shaping for the graph and panel (unit-tested)
+    graph_component/        custom SVG node-graph component (index.html)
   report/
     templates/report.html.j2
     generate.py              HTML report + SHA-256 chain-of-custody hash
   simulate/
     synthetic_incident.py    benign Mode B fixture generator (Section 6)
     synthetic_disk_image.py  benign Mode A (FAT32 image) fixture generator
-    hive_writer.py           Windows-only helper: builds real, empty synthetic
-                              registry hives via the Windows Registry API
+    hive_writer.py           Windows-only helper: builds real, valid synthetic
+                              registry hives (populated with fake values only)
+                              via the Windows Registry API
   models.py                  Event / Finding - the normalization boundary
+  plain_language.py          plain-English wording of evidence (UI + report)
   cli.py                     `ransomtrace analyze|simulate`
+Run RansomTrace.bat          double-click launcher for the dashboard (project root)
 ```
 
 Both ingestion modes converge on the same `list[Event]` shape
@@ -110,7 +118,7 @@ disk image ──┐
              ├─► ingest ─► extractors ─► [Event] ─► correlation/rules.py ─► [Finding]
 artifact dir ─┘                                                                │
                                                                                 ▼
-                                                          CLI review (Confirm/FP/Uncertain)
+                                                          CLI or web dashboard review (Confirm/FP/Uncertain)
                                                                                 │
                                                                                 ▼
                                                                     HTML report (report.html.j2)
@@ -159,8 +167,11 @@ merely *mimics ransomware artifacts*:
 
 - **Filesystem**: ordinary files are copied/renamed to a fake extension
   (`.locked_demo`) and a clearly-labeled `README_RESTORE_FILES.txt` dummy
-  note is dropped alongside them. File "content" is a placeholder string —
-  nothing is actually encrypted.
+  note is dropped alongside them. Each "encrypted" file holds a short marker
+  followed by 16 KiB of `os.urandom()` bytes: statistically close to random
+  (as real ciphertext is), so the entropy check has honest data to measure,
+  but nothing is actually encrypted. The experiment results depend on this -
+  placeholder text would score only about 4-5 bits/byte, not ~7.9.
 - **Registry**: [`simulate/hive_writer.py`](ransomtrace/simulate/hive_writer.py)
   creates a private, throwaway registry hive using the real Windows Registry
   API (`RegLoadAppKeyW`) — not loaded into `HKLM`/`HKCU`, not visible in
@@ -256,7 +267,7 @@ Service), T1070.001 (Clear Windows Event Logs). See
 pytest
 ```
 
-52 tests across ingestion, all three extractors (including entropy
+69 tests across ingestion, all three extractors (including entropy
 corroboration), all five correlation rules, both validation flows (CLI and
 the Streamlit web UI, the latter via Streamlit's official `AppTest` harness
 for real widget-interaction testing), and report generation — including

@@ -32,7 +32,7 @@ def test_analyze_and_confirm_finding_flows_into_report(tmp_path):
     check_button = next(w for w in at.button if w.label == "Check for ransomware")
     check_button.click().run()
     assert not at.exception
-    assert "found to review" in at.success[0].value
+    assert any("High risk" in m.value for m in at.markdown)
 
     # Confirm the first finding (plain-language options shown to the user).
     at.radio[0].set_value("Yes, this is real")
@@ -56,4 +56,4 @@ def test_sample_incident_button_runs_end_to_end(tmp_path):
     sample_button = next(w for w in at.button if w.label == "Try a sample incident")
     sample_button.click().run()
     assert not at.exception
-    assert "found to review" in at.success[0].value
+    assert any("High risk" in m.value for m in at.markdown)

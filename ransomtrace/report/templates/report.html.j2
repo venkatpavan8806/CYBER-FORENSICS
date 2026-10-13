@@ -48,6 +48,8 @@
   details summary { cursor: pointer; color: var(--muted); font-size: 0.85rem; margin-top: 0.5rem; }
   .evidence-item { font-family: "SF Mono", Consolas, monospace; font-size: 0.78rem; background: #0d1220;
                     border: 1px solid var(--border); border-radius: 6px; padding: 0.6rem 0.8rem; margin: 0.4rem 0; }
+  .evidence-item .ev-plain { font-family: -apple-system, Segoe UI, Roboto, sans-serif; font-size: 0.85rem;
+                              color: var(--text); margin-bottom: 0.4rem; line-height: 1.5; }
   .evidence-item .ev-desc { color: var(--text); margin-bottom: 0.3rem; }
   .evidence-item .ev-raw { color: var(--muted); white-space: pre-wrap; word-break: break-all; }
   footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); color: var(--muted);
@@ -121,6 +123,7 @@
       <summary>{{ f.evidence|length }} supporting event(s) &mdash; click to expand raw evidence</summary>
       {% for e in f.evidence %}
       <div class="evidence-item">
+        <div class="ev-plain"><strong>{{ e.timestamp|friendly_time }}</strong> &mdash; {{ e|plain_event }}</div>
         <div class="ev-desc">[{{ e.source_extractor.value }} / {{ e.event_type }}] {{ e.timestamp.isoformat() }}</div>
         <div class="ev-desc">{{ e.description }}</div>
         <div class="ev-raw">{{ e.raw_evidence }}</div>

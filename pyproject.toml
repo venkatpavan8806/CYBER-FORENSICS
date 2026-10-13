@@ -21,3 +21,6 @@ ransomtrace = "ransomtrace.cli:main"
 
 [tool.setuptools.packages.find]
 include = ["ransomtrace*"]
+
+[tool.setuptools.package-data]
+ransomtrace = ["validation/graph_component/*.html", "report/templates/*.j2"]
