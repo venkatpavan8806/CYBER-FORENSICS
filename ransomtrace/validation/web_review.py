@@ -245,15 +245,17 @@ def _render_evidence(st, events, key: str) -> None:  # pragma: no cover
     for line in pl.summarize_events(events):
         st.markdown(f"- {_md(line)}")
     if st.checkbox("Show each item", key=f"items_{key}"):
-        for event in events[:25]:
-            st.markdown(f"- *{pl.friendly_time(event.timestamp)}* \u2014 {_md(pl.plain_event(event))}")
+        show_all = len(events) > 25 and st.session_state.get(f"allitems_{key}", False)
+        for event in events if show_all else events[:25]:
+            st.markdown(f"- *{pl.friendly_time(event.timestamp)}* — {_md(pl.plain_event(event))}")
         if len(events) > 25:
-            st.caption(f"... and {len(events) - 25} more")
+            st.checkbox(f"Show all {len(events)} items", key=f"allitems_{key}")
     if st.checkbox("Show raw technical text", key=f"raw_{key}"):
-        for event in events[:10]:
+        show_all = len(events) > 10 and st.session_state.get(f"allraw_{key}", False)
+        for event in events if show_all else events[:10]:
             st.code(f"[{event.source_extractor.value}] {event.timestamp.isoformat()} - {event.description}")
         if len(events) > 10:
-            st.caption(f"... and {len(events) - 10} more")
+            st.checkbox(f"Show all {len(events)} raw lines", key=f"allraw_{key}")
 
 
 def _short(text: str, limit: int = 40) -> str:

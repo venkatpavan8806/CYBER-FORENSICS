@@ -267,7 +267,7 @@ Service), T1070.001 (Clear Windows Event Logs). See
 pytest
 ```
 
-69 tests across ingestion, all three extractors (including entropy
+70 tests across ingestion, all three extractors (including entropy
 corroboration), all five correlation rules, both validation flows (CLI and
 the Streamlit web UI, the latter via Streamlit's official `AppTest` harness
 for real widget-interaction testing), and report generation — including

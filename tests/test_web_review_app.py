@@ -57,3 +57,25 @@ def test_sample_incident_button_runs_end_to_end(tmp_path):
     sample_button.click().run()
     assert not at.exception
     assert any("High risk" in m.value for m in at.markdown)
+
+
+def test_show_all_items_toggle_reveals_every_event():
+    at = AppTest.from_file(str(APP_PATH), default_timeout=30)
+    at.run()
+    next(w for w in at.button if w.label == "Try a sample incident").click().run()
+    assert not at.exception
+
+    def bullets():
+        return [m for m in at.markdown if m.value.startswith("- *")]
+
+    next(c for c in at.checkbox if c.label == "Show each item").check().run()
+    assert len(bullets()) == 25
+    show_all = next(c for c in at.checkbox if c.label.startswith("Show all") and "items" in c.label)
+    total = int(show_all.label.split()[2])
+    show_all.check().run()
+    assert not at.exception
+    assert len(bullets()) == total > 25
+
+    next(c for c in at.checkbox if c.label == "Show raw technical text").check().run()
+    next(c for c in at.checkbox if c.label.startswith("Show all") and "raw" in c.label).check().run()
+    assert not at.exception
